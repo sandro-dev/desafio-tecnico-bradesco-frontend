@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 330px;
-  height: 420px;
+  height: 450px;
   background: transparent;
   border-radius: 20px;
   border-top-right-radius: 50px;
@@ -35,7 +35,7 @@ export const Content = styled.section`
   background: #fff;
   flex: 1;
   min-height: 250px;
-  height: 80%;
+  height: 350px;
   padding: 30px 0;
   overflow-y: auto;
   overflow-x: hidden;
@@ -44,12 +44,16 @@ export const Content = styled.section`
 export const Footer = styled.footer`
   background: transparent;
   display: flex;
+  flex-direction: row;
+  width: 330px;
 
-  textarea {
-    width: 100%;
+  input {
+    width: 258px;
+    height: 40px;
     background: #f5f5f5;
     color: #222d38;
-    padding: 8px 10px 0 10px;
+    padding: 2px 5px 0 25px;
+    font-size: 16px;
 
     border-bottom-left-radius: 10px;
     resize: none;
@@ -57,11 +61,16 @@ export const Footer = styled.footer`
   }
 
   button {
-    width: 80px;
+    flex: 1;
+    padding: 0 20px;
     height: 40px;
-    background: #c30826;
+    background: #f5f5f5;
     color: #fff;
 
     border-bottom-right-radius: 10px;
+  }
+
+  form {
+    display: flex;
   }
 `;

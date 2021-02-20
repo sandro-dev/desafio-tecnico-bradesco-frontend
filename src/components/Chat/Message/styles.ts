@@ -10,8 +10,8 @@ export const Content = styled.div`
     width: 260px;
     margin: 20px auto;
     border-radius: 15px;
-    background: #c30826;
-    color: #fff;
+    background: #fddede;
+    color: #333;
     padding: 10px;
     text-align: center;
     font-weight: 700;
@@ -24,9 +24,9 @@ export const Content = styled.div`
     width: 0px;
     height: 0px;
     position: absolute;
-    border-left: 15px solid #c30826;
+    border-left: 15px solid #fddede;
     border-right: 15px solid transparent;
-    border-top: 15px solid #c30826;
+    border-top: 15px solid #fddede;
     border-bottom: 15px solid transparent;
     right: -16px;
     top: 0px;
@@ -38,8 +38,8 @@ export const Content = styled.div`
     height: 0px;
     position: absolute;
     border-left: 15px solid transparent;
-    border-right: 15px solid #c30826;
-    border-top: 15px solid #c30826;
+    border-right: 15px solid #fddede;
+    border-top: 15px solid #fddede;
     border-bottom: 15px solid transparent;
     left: -16px;
     top: 0px;
