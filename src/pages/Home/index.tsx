@@ -1,26 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { IoChatbubblesOutline } from 'react-icons/io5';
 
-import api from '../../services/api';
+import Header from '../../components/Header';
+import Chat from '../../components/Chat';
 
-import logo from '../../assets/logo-bradesco-seguros.svg';
-
-import { Container, Header, Content } from './styles';
+import { Container, Content } from './styles';
 
 const Home: React.FC = () => {
-  useEffect(() => {
-    async function loadBots() {
-      const response = await api.get('/bots');
-      console.log(response.data);
-    }
-    loadBots();
-  }, []);
-
   return (
     <Container>
-      <Header>
-        <img src={logo} alt="Bradesco Seguros" width="30%" />
-      </Header>
+      <Header />
       <Content>
         <h1>Produtos Bradesco Seguros</h1>
         <h2>Seguro Auto</h2>
@@ -54,6 +43,7 @@ const Home: React.FC = () => {
           </button>
         </div>
       </Content>
+      <Chat />
     </Container>
   );
 };
