@@ -36,8 +36,9 @@ export const Content = styled.section`
   flex: 1;
   min-height: 250px;
   height: 80%;
-  padding: 10px;
-  overflow-y: scroll;
+  padding: 30px 0;
+  overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 export const Footer = styled.footer`
