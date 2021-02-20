@@ -1,12 +1,10 @@
 import React from 'react';
-import Header from '../../../components/Header';
 
 import { Container, Content } from './styles';
 
 const SeguroAuto: React.FC = () => {
   return (
     <Container>
-      <Header />
       <Content>
         <h1>Seguro Auto</h1>
         <p>

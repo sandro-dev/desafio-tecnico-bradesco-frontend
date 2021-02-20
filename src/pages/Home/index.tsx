@@ -1,15 +1,11 @@
 import React from 'react';
 import { IoChatbubblesOutline } from 'react-icons/io5';
 
-import Header from '../../components/Header';
-import Chat from '../../components/Chat';
-
 import { Container, Content } from './styles';
 
 const Home: React.FC = () => {
   return (
     <Container>
-      <Header />
       <Content>
         <h1>Produtos Bradesco Seguros</h1>
         <h2>Seguro Auto</h2>
@@ -43,7 +39,6 @@ const Home: React.FC = () => {
           </button>
         </div>
       </Content>
-      <Chat />
     </Container>
   );
 };

@@ -2,13 +2,9 @@ import React from 'react';
 
 import { Container, Content } from './styles';
 
-import Header from '../../components/Header';
-import Chat from '../../components/Chat';
-
 const About: React.FC = () => {
   return (
     <Container>
-      <Header />
       <Content>
         <h1>Sobre</h1>
         <p>
@@ -16,7 +12,6 @@ const About: React.FC = () => {
           Bradesco Seguros
         </p>
       </Content>
-      <Chat />
     </Container>
   );
 };
