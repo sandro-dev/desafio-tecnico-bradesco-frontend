@@ -42,4 +42,8 @@ export const Content = styled.div`
       }
     }
   }
+
+  .activeLink {
+    color: #c30c30;
+  }
 `;

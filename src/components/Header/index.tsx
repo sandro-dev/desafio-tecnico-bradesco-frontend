@@ -10,19 +10,19 @@ const Header: React.FC = () => {
       <Content>
         <img src={logo} width="25%" alt="Bradesco Seguros" />
         <nav>
-          <NavLink to="/" activeClassName="activeLink">
+          <NavLink to="/home" activeClassName="activeLink">
             Home
           </NavLink>
-          <NavLink to="#" activeClassName="activeLink">
+          <NavLink to="/seguro-auto" activeClassName="activeLink">
             Seguro Auto
           </NavLink>
-          <NavLink to="#" activeClassName="activeLink">
+          <NavLink to="/seguro-residencial" activeClassName="activeLink">
             Seguro Residencial
           </NavLink>
-          <NavLink to="#" activeClassName="activeLink">
-            Seguro Viagens
+          <NavLink to="/seguro-viagem" activeClassName="activeLink">
+            Seguro Viagem
           </NavLink>
-          <NavLink to="/about" activeClassName="activeLink">
+          <NavLink to="/sobre" activeClassName="activeLink">
             Sobre
           </NavLink>
         </nav>
