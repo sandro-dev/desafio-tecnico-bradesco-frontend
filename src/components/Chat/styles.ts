@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 330px;
-  height: 450px;
+  height: 420px;
   background: transparent;
   border-radius: 20px;
   border-top-right-radius: 50px;
@@ -34,11 +34,17 @@ export const Header = styled.header`
 export const Content = styled.section`
   background: #fff;
   flex: 1;
-  min-height: 250px;
   height: 350px;
   padding: 30px 0;
   overflow-y: auto;
   overflow-x: hidden;
+
+  p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+  }
 `;
 
 export const Footer = styled.footer`

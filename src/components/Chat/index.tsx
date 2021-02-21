@@ -1,4 +1,4 @@
-import React, { FormEvent, useState, useRef } from 'react';
+import React, { FormEvent, useRef } from 'react';
 import { RiSendPlaneFill } from 'react-icons/ri';
 
 import bot from '../../assets/bot-1.svg';
@@ -16,7 +16,7 @@ const Chat: React.FC<MessageProps> = ({ messages = [] }) => {
   const formRef = useRef<HTMLFormElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const { addMessage } = useChat();
+  const { addMessage, chatProps } = useChat();
 
   async function handleAddMessage(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -25,10 +25,9 @@ const Chat: React.FC<MessageProps> = ({ messages = [] }) => {
     if (!message) return;
 
     await addMessage({
-      timestamp: '2021-02-19T01:38:02.000Z',
-      from: '57bee750-4842-406d-b91a-7535e7ea6d0f',
-      to: 'e645961f-e0bc-4eda-9d8f-4df3224c405f',
-      conversationId: '36b347a0-ea45-40a8-a958-069fc6364498',
+      conversationId: chatProps.conversationId,
+      from: chatProps.userId,
+      to: chatProps.botId,
       text: message,
     });
 
@@ -42,9 +41,11 @@ const Chat: React.FC<MessageProps> = ({ messages = [] }) => {
       </Header>
       <Content>
         {messages.length > 0 ? (
-          messages.map(msg => <MessageSpeech key={msg.id} text={msg.text} />)
+          messages.map(msg => (
+            <MessageSpeech key={msg.id} text={msg.text} from={msg.from} />
+          ))
         ) : (
-          <p>loading...</p>
+          <p>carregando chat...</p>
         )}
       </Content>
       <Footer>
