@@ -1,13 +1,11 @@
-import React, { FormEvent, useRef } from 'react';
+import React, { FormEvent, useRef, useEffect } from 'react';
 import { RiSendPlaneFill } from 'react-icons/ri';
 
-import Loading from '../Loading';
-
-import bot from '../../assets/bot-1.svg';
-
 import { ChatMessage, useChat } from '../../hooks/Chat';
+import Loading from '../Loading';
 import MessageSpeech from './Message';
 
+import bot from '../../assets/bot-1.svg';
 import { Container, Header, Content, Footer } from './styles';
 
 interface MessageProps {
@@ -17,6 +15,13 @@ interface MessageProps {
 const Chat: React.FC<MessageProps> = ({ messages = [] }) => {
   const formRef = useRef<HTMLFormElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const messagesEndRef = useRef<HTMLInputElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(scrollToBottom, [messages]);
 
   const { addMessage, chatProps, loading } = useChat();
 
@@ -34,6 +39,8 @@ const Chat: React.FC<MessageProps> = ({ messages = [] }) => {
     });
 
     formRef.current?.reset();
+
+    scrollToBottom();
   }
 
   return (
@@ -49,6 +56,7 @@ const Chat: React.FC<MessageProps> = ({ messages = [] }) => {
             <MessageSpeech key={msg.id} text={msg.text} from={msg.from} />
           ))
         )}
+        <div ref={messagesEndRef} />
       </Content>
       <Footer>
         <form onSubmit={handleAddMessage} ref={formRef}>

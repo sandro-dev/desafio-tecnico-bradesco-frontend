@@ -35,8 +35,9 @@ export const Content = styled.section`
   background: #fff;
   flex: 1;
   height: 350px;
-  overflow-y: auto;
+  overflow-y: scroll;
   overflow-x: hidden;
+  padding-bottom: 30px;
 
   p {
     display: flex;
