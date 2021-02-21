@@ -26,7 +26,7 @@ interface ChatDTO {
 
 interface ChatContextData {
   addMessage(message: Omit<ChatMessage, 'id'>): Promise<void>;
-  hideChat(id: string): void;
+  toggleChat(isClosed: boolean): void;
   chatProps: ChatDTO;
   loading?: boolean;
 }
@@ -66,18 +66,29 @@ const ChatProvider: React.FC = ({ children }) => {
       const now = Date.now();
       if (now > Number(expiresIn)) {
         localStorage.clear();
+      } else {
+        loadChat();
       }
     } else {
       const date = new Date();
       date.setHours(date.getHours() + 1);
       expiresIn = String(date.getTime());
       localStorage.setItem('@ChatBradesco:expiresIn', String(expiresIn));
-      console.log('expiresIn =>', expiresIn);
       loadChat();
     }
 
     setLoading(false);
   }, [chatProps.conversationId]);
+
+  const persistData = useCallback(
+    ({ conversationId, userId, botId }: ChatDTO) => {
+      console.log('persistData localStorage');
+      localStorage.setItem('@ChatBradesco:conversationId', conversationId);
+      localStorage.setItem('@ChatBradesco:userId', userId);
+      localStorage.setItem('@ChatBradesco:botId', botId);
+    },
+    [],
+  );
 
   const addMessage = useCallback(
     async ({ conversationId, from, to, text }: Omit<ChatMessage, 'id'>) => {
@@ -86,22 +97,24 @@ const ChatProvider: React.FC = ({ children }) => {
       const response = await api.post('/messages', newMessage);
       const { conversationId: chatId, from: userId, to: botId } = response.data;
 
-      localStorage.setItem('@ChatBradesco:conversationId', chatId);
-      localStorage.setItem('@ChatBradesco:userId', userId);
-      localStorage.setItem('@ChatBradesco:botId', botId);
+      if (!chatProps.conversationId) {
+        persistData({ conversationId: chatId, userId, botId });
+      }
 
       setChatProps({ conversationId: chatId, userId, botId });
       setMessages(state => [...state, response.data]);
     },
-    [],
+    [persistData, chatProps.conversationId],
   );
 
-  const hideChat = useCallback((id: string) => {
-    console.log(`hide chat ${id}`);
+  const toggleChat = useCallback((isClosed: boolean) => {
+    console.log(`is chat closed? ${isClosed}`);
   }, []);
 
   return (
-    <ChatContext.Provider value={{ addMessage, chatProps, hideChat, loading }}>
+    <ChatContext.Provider
+      value={{ addMessage, chatProps, loading, toggleChat }}
+    >
       {children}
       <Chat messages={messages} />
     </ChatContext.Provider>
