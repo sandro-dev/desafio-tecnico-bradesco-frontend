@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useChat } from '../../../hooks/Chat';
 
-import { Container, Content } from './styles';
+import { Container } from './styles';
 
 interface MessageProps {
   from: string;
@@ -12,13 +12,11 @@ interface MessageProps {
 const Message: React.FC<MessageProps> = ({ text, from }) => {
   const { chatProps } = useChat();
 
-  const direction = from === chatProps.userId ? 'speech-right' : 'speech-left';
+  const direction = from === chatProps.userId ? 'right' : 'left';
 
   return (
     <Container>
-      <Content>
-        <div className={`message ${direction}`}>{text}</div>
-      </Content>
+      <div className={`message-${direction} speech-${direction}`}>{text}</div>
     </Container>
   );
 };
