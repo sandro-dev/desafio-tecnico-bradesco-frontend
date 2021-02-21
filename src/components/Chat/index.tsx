@@ -1,5 +1,12 @@
-import React, { FormEvent, useRef, useEffect } from 'react';
+import React, {
+  FormEvent,
+  useRef,
+  useEffect,
+  useState,
+  useCallback,
+} from 'react';
 import { RiSendPlaneFill } from 'react-icons/ri';
+import { FiMaximize2, FiMinus } from 'react-icons/fi';
 
 import { ChatMessage, useChat } from '../../hooks/Chat';
 import Loading from '../Loading';
@@ -12,10 +19,17 @@ interface MessageProps {
   messages?: ChatMessage[];
 }
 
+const icons = {
+  maximize: <FiMaximize2 size={16} color="#c30826" />,
+  minimize: <FiMinus size={16} color="#c30826" />,
+};
+
 const Chat: React.FC<MessageProps> = ({ messages = [] }) => {
   const formRef = useRef<HTMLFormElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLInputElement>(null);
+
+  const [isClosed, setIsClosed] = useState<boolean>(true);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -23,7 +37,7 @@ const Chat: React.FC<MessageProps> = ({ messages = [] }) => {
 
   useEffect(scrollToBottom, [messages]);
 
-  const { addMessage, chatProps, loading } = useChat();
+  const { addMessage, chatProps, loading, toggleChat } = useChat();
 
   async function handleAddMessage(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -43,12 +57,26 @@ const Chat: React.FC<MessageProps> = ({ messages = [] }) => {
     scrollToBottom();
   }
 
+  const handleToggleChat = useCallback(() => {
+    setIsClosed(!isClosed);
+    toggleChat(!isClosed);
+  }, [isClosed, toggleChat]);
+
+  useEffect(() => {
+    if (!isClosed) {
+      scrollToBottom();
+    }
+  }, [isClosed]);
+
   return (
-    <Container>
-      <Header>
+    <Container isClosed={isClosed}>
+      <Header isClosed={isClosed}>
         <img src={bot} alt="bot" />
+        <button type="button" onClick={handleToggleChat}>
+          {isClosed ? icons.maximize : icons.minimize}
+        </button>
       </Header>
-      <Content>
+      <Content isClosed={isClosed}>
         {loading ? (
           <Loading />
         ) : (
@@ -58,7 +86,7 @@ const Chat: React.FC<MessageProps> = ({ messages = [] }) => {
         )}
         <div ref={messagesEndRef} />
       </Content>
-      <Footer>
+      <Footer isClosed={isClosed}>
         <form onSubmit={handleAddMessage} ref={formRef}>
           <input
             type="text"
