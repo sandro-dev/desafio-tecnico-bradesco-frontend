@@ -12,7 +12,7 @@ const rotate = keyframes`
 export const Container = styled.div`
   font-size: 28px;
   font-weight: bold;
-  color: #c30826;
+  color: #3d3d4d;
   display: flex;
   justify-content: center;
   align-items: center;

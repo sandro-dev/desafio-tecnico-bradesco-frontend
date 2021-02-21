@@ -6,7 +6,7 @@ import { Container } from './styles';
 const Loading: React.FC = () => {
   return (
     <Container>
-      <FaSpinner color="#c30826" size={32} />
+      <FaSpinner color="#3d3d4d" size={32} />
       Carregando...
     </Container>
   );
