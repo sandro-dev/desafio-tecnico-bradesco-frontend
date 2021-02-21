@@ -82,7 +82,6 @@ const ChatProvider: React.FC = ({ children }) => {
 
   const persistData = useCallback(
     ({ conversationId, userId, botId }: ChatDTO) => {
-      console.log('persistData localStorage');
       localStorage.setItem('@ChatBradesco:conversationId', conversationId);
       localStorage.setItem('@ChatBradesco:userId', userId);
       localStorage.setItem('@ChatBradesco:botId', botId);
@@ -97,18 +96,18 @@ const ChatProvider: React.FC = ({ children }) => {
       const response = await api.post('/messages', newMessage);
       const { conversationId: chatId, from: userId, to: botId } = response.data;
 
+      setChatProps({ conversationId: chatId, userId, botId });
+      setMessages(state => [...state, response.data]);
+
       if (!chatProps.conversationId) {
         persistData({ conversationId: chatId, userId, botId });
       }
-
-      setChatProps({ conversationId: chatId, userId, botId });
-      setMessages(state => [...state, response.data]);
     },
     [persistData, chatProps.conversationId],
   );
 
   const toggleChat = useCallback((isClosed: boolean) => {
-    console.log(`is chat closed? ${isClosed}`);
+    localStorage.setItem('@ChatBradesco:chatIsClosed', String(isClosed));
   }, []);
 
   return (
