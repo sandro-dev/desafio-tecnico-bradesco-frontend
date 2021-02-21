@@ -59,7 +59,23 @@ const ChatProvider: React.FC = ({ children }) => {
         setMessages(response.data);
       }
     }
-    loadChat();
+
+    let expiresIn = localStorage.getItem('@ChatBradesco:expiresIn');
+
+    if (expiresIn) {
+      const now = Date.now();
+      if (now > Number(expiresIn)) {
+        localStorage.clear();
+      }
+    } else {
+      const date = new Date();
+      date.setHours(date.getHours() + 1);
+      expiresIn = String(date.getTime());
+      localStorage.setItem('@ChatBradesco:expiresIn', String(expiresIn));
+      console.log('expiresIn =>', expiresIn);
+      loadChat();
+    }
+
     setLoading(false);
   }, [chatProps.conversationId]);
 
