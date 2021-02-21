@@ -11,17 +11,23 @@ import Chat from '../components/Chat';
 import api from '../services/api';
 
 export interface ChatMessage {
-  timestamp: string;
+  conversationId: string;
+  id: string;
   from: string;
   to: string;
   text: string;
-  id: string;
+}
+
+interface ChatDTO {
   conversationId: string;
+  userId: string;
+  botId: string;
 }
 
 interface ChatContextData {
   addMessage(message: Omit<ChatMessage, 'id'>): Promise<void>;
   hideChat(id: string): void;
+  chatProps: ChatDTO;
 }
 
 const ChatContext = createContext<ChatContextData>({} as ChatContextData);
@@ -29,42 +35,43 @@ const ChatContext = createContext<ChatContextData>({} as ChatContextData);
 const ChatProvider: React.FC = ({ children }) => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
 
+  const [chatProps, setChatProps] = useState<ChatDTO>(() => {
+    const conversationId = localStorage.getItem('@ChatBradesco:conversationId');
+    const userId = localStorage.getItem('@ChatBradesco:userId');
+    const botId = localStorage.getItem('@ChatBradesco:botId');
+
+    // if already exists on localStorage, return data
+    if (conversationId && userId && botId) {
+      return { conversationId, userId, botId };
+    }
+    // if not exists, return empty object
+    return {} as ChatDTO;
+  });
+
   useEffect(() => {
     async function loadChat() {
-      const response = await api.get('/messages', {
-        params: {
-          conversationId: '36b347a0-ea45-40a8-a958-069fc6364498',
-        },
-      });
-      console.log('loadChat messages ==> ', response.data);
-
-      setMessages(response.data);
+      if (chatProps.conversationId) {
+        const response = await api.get('/messages', {
+          params: { conversationId: chatProps.conversationId },
+        });
+        setMessages(response.data);
+      }
     }
     loadChat();
-  }, []);
+  }, [chatProps.conversationId]);
 
   const addMessage = useCallback(
-    async ({
-      conversationId,
-      timestamp,
-      from,
-      to,
-      text,
-    }: Omit<ChatMessage, 'id'>) => {
-      const id = uuid();
-
-      const newMessage = {
-        id,
-        conversationId,
-        timestamp,
-        from,
-        to,
-        text,
-      };
+    async ({ conversationId, from, to, text }: Omit<ChatMessage, 'id'>) => {
+      const newMessage = { id: uuid(), conversationId, from, to, text };
 
       const response = await api.post('/messages', newMessage);
-      console.log('newMessage', response.data);
+      const { conversationId: chatId, from: userId, to: botId } = response.data;
 
+      localStorage.setItem('@ChatBradesco:conversationId', chatId);
+      localStorage.setItem('@ChatBradesco:userId', userId);
+      localStorage.setItem('@ChatBradesco:botId', botId);
+
+      setChatProps({ conversationId: chatId, userId, botId });
       setMessages(state => [...state, response.data]);
     },
     [],
@@ -75,7 +82,7 @@ const ChatProvider: React.FC = ({ children }) => {
   }, []);
 
   return (
-    <ChatContext.Provider value={{ addMessage, hideChat }}>
+    <ChatContext.Provider value={{ addMessage, chatProps, hideChat }}>
       {children}
       <Chat messages={messages} />
     </ChatContext.Provider>
