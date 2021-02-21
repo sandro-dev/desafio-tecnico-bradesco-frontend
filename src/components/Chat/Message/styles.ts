@@ -19,7 +19,7 @@ export const Content = styled.div`
     position: relative;
   }
 
-  .speech-left:before {
+  .speech-right:before {
     content: '';
     width: 0px;
     height: 0px;
@@ -32,7 +32,7 @@ export const Content = styled.div`
     top: 0px;
   }
 
-  .speech-right:before {
+  .speech-left:before {
     content: '';
     width: 0px;
     height: 0px;
