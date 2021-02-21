@@ -35,7 +35,6 @@ export const Content = styled.section`
   background: #fff;
   flex: 1;
   height: 350px;
-  padding: 30px 0;
   overflow-y: auto;
   overflow-x: hidden;
 

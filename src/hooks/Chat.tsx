@@ -28,12 +28,14 @@ interface ChatContextData {
   addMessage(message: Omit<ChatMessage, 'id'>): Promise<void>;
   hideChat(id: string): void;
   chatProps: ChatDTO;
+  loading?: boolean;
 }
 
 const ChatContext = createContext<ChatContextData>({} as ChatContextData);
 
 const ChatProvider: React.FC = ({ children }) => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const [chatProps, setChatProps] = useState<ChatDTO>(() => {
     const conversationId = localStorage.getItem('@ChatBradesco:conversationId');
@@ -58,6 +60,7 @@ const ChatProvider: React.FC = ({ children }) => {
       }
     }
     loadChat();
+    setLoading(false);
   }, [chatProps.conversationId]);
 
   const addMessage = useCallback(
@@ -82,7 +85,7 @@ const ChatProvider: React.FC = ({ children }) => {
   }, []);
 
   return (
-    <ChatContext.Provider value={{ addMessage, chatProps, hideChat }}>
+    <ChatContext.Provider value={{ addMessage, chatProps, hideChat, loading }}>
       {children}
       <Chat messages={messages} />
     </ChatContext.Provider>
