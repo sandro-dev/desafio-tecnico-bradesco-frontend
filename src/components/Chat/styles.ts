@@ -39,6 +39,11 @@ export const Header = styled.header<ChatProps>`
   align-items: center;
   justify-content: space-between;
 
+  > strong {
+    color: #fff;
+    font-size: 24px;
+  }
+
   > button {
     background: #fff;
     padding: 10px;

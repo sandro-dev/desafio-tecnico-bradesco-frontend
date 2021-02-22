@@ -8,11 +8,13 @@ import React, {
 import { RiSendPlaneFill } from 'react-icons/ri';
 import { FiMaximize2, FiMinus } from 'react-icons/fi';
 
+import { useSession } from '../../hooks/Session';
 import { ChatMessage, useChat } from '../../hooks/Chat';
+
 import Loading from '../Loading';
 import MessageSpeech from './Message';
 
-import bot from '../../assets/bot-1.svg';
+import botImage from '../../assets/bot-1.svg';
 import { Container, Header, Content, Footer } from './styles';
 
 interface MessageProps {
@@ -29,7 +31,7 @@ const Chat: React.FC<MessageProps> = ({ messages = [] }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLInputElement>(null);
 
-  const [isClosed, setIsClosed] = useState<boolean>(true);
+  const [isClosed, setIsClosed] = useState<boolean>(false);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -37,7 +39,8 @@ const Chat: React.FC<MessageProps> = ({ messages = [] }) => {
 
   useEffect(scrollToBottom, [messages]);
 
-  const { addMessage, chatProps, loading, toggleChat } = useChat();
+  const { addMessage, loading, toggleChat } = useChat();
+  const { sessionData } = useSession();
 
   async function handleAddMessage(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -46,9 +49,9 @@ const Chat: React.FC<MessageProps> = ({ messages = [] }) => {
     if (!message) return;
 
     await addMessage({
-      conversationId: chatProps.conversationId,
-      from: chatProps.userId,
-      to: chatProps.botId,
+      conversationId: sessionData.conversationId,
+      from: sessionData.userId,
+      to: sessionData.botId,
       text: message,
     });
 
@@ -68,10 +71,27 @@ const Chat: React.FC<MessageProps> = ({ messages = [] }) => {
     }
   }, [isClosed]);
 
+  useEffect(() => {
+    const { conversationId, botId, botName, userId } = sessionData;
+
+    if (conversationId) {
+      if (!localStorage.getItem('@ChatBradesco:chatStarted')) {
+        addMessage({
+          conversationId,
+          from: botId,
+          to: userId,
+          text: `Olá, tudo bem? Eu me chamo ${botName}. Posso te ajudar?`,
+        });
+
+        localStorage.setItem('@ChatBradesco:chatStarted', 'true');
+      }
+    }
+  }, [sessionData, addMessage]);
+
   return (
     <Container isClosed={isClosed}>
       <Header isClosed={isClosed}>
-        <img src={bot} alt="bot" />
+        <img src={botImage} alt="bot" />
         <button type="button" onClick={handleToggleChat}>
           {isClosed ? icons.maximize : icons.minimize}
         </button>
