@@ -23,10 +23,10 @@
 
 ## :hammer: Funcionalidades
 
-- Enviar mensagens no chat
+- Envia mensagens no chat
 - Recebe mensagens enviadas pelo bot
 - A tela rola para baixo a cada nova mensagem depois que alcança o tamanho da tela de mensages
-- Carrega a tela de chat em todas as rotas da aplicação
+- Mantem a tela de chat em todas as rotas da aplicação
 - Armazena os dados do chat entre o usuário e o bot por 1 hora;
 - É possível fechar a janela e abrir do navegador e recuperar as mensagens de chat, pelo período de 1 hora;
 - É possível maximizar/minimizar a tela de chat
@@ -63,28 +63,28 @@ Faça um clone desse repositório utilizando o comando `git clone` ou faça down
 
 
 ### :computer: Frontend
-- Entre na pasta raiz do projeto:
+Entre na pasta raiz do projeto:
 
-  ```bash
+```bash
   cd desafio-tecnico-bradesco-frontend
-  ```
+```
 
 - Execute o comando yarn para instalar todas as dependências;
 
 ```bash
   yarn
-  ```
+```
 
  - Execute o comando abaixo e preencha o arquivo .env com suas variáveis de ambiente, para que tudo funcione perfeitamente:
 
 ```bash
   cp .env.example .env
-  ```
+```
 
 - Execute o seguinte comando para executar a aplicação;
 ```bash
   yarn start
-  ```
+```
 
 - Aguarde o browser abrir com o url da aplicação;
 - Pronto, agora é só explorar a aplicação
