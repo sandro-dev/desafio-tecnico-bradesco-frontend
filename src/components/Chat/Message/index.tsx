@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useChat } from '../../../hooks/Chat';
+import { useSession } from '../../../hooks/Session';
 
 import { Container } from './styles';
 
@@ -10,9 +10,9 @@ interface MessageProps {
 }
 
 const Message: React.FC<MessageProps> = ({ text, from }) => {
-  const { chatProps } = useChat();
+  const { sessionData } = useSession();
 
-  const direction = from === chatProps.userId ? 'right' : 'left';
+  const direction = from === sessionData.userId ? 'right' : 'left';
 
   return (
     <Container>
