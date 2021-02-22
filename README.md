@@ -14,7 +14,6 @@
 - [Funcionalidades](#hammer-Funcionalidades)
 - [Tecnologias](#gear-Tecnologias)
 - [Instalação do Frontend ](#computer-Frontend)
-
 - [Screenshots](#camera-Screenshots)
 - [Licença](#memo-Licença)
 
@@ -40,11 +39,20 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
   | Tecnologia  |  Descrição  |
   | --- | --- |
+  | [TypeScript](https://www.typescriptlang.org/) | TypeScript extends JavaScript by adding types.
+  By understanding JavaScript, TypeScript saves you time catching errors and providing fixes before you run code |
   | [React.js](https://reactjs.org/)  | A JavaScript library for building user interfaces |
   | [ESLint](https://eslint.org/) | Find and fix problems in your JavaScript code |
   | [Prettier](https://prettier.io/) | An opinionated code formatter |
-  | [Docker](https://www.docker.com/) | Docker is an open platform for developing, shipping, and running applications. Docker enables you to separate your applications from your infrastructure so you can deliver software quickly. |
-
+  | [CommitLint](https://commitlint.js.org/#/) | commitlint helps your team adhering to a commit convention. By supporting npm-installed configurations it makes sharing of commit conventions easy. |
+  | [Commitizen](https://github.com/commitizen/cz-cli) | Commitizen is an open source project that helps contributors be good open source citizens.  |
+  | [husky](https://www.npmjs.com/package/husky) | Git hooks made easy - Husky improves your commits and more |
+  | [React Icons](https://react-icons.github.io/react-icons/) | Include popular icons in your React projects easily with react-icons, which utilizes ES6 imports that allows you to include only the icons that your project is using. |
+  | [Styled Components](https://styled-components.com/) | Visual primitives for the component age.
+Use the best bits of ES6 and CSS to style your apps without stress |
+  | [react-router-dom](https://www.npmjs.com/package/react-router-dom) | DOM bindings for React Router.  |
+  | [uuid](https://www.npmjs.com/package/uuid) | For the creation of RFC4122 UUIDs |
+  | [axios](https://github.com/axios/axios) | Promise based HTTP client for the browser and node.js |
 
 
 ## :wrench: Instalação
@@ -54,10 +62,6 @@ Faça um clone desse repositório utilizando o comando `git clone` ou faça down
 ```bash
   git clone https://github.com/sandro-dev/desafio-tecnico-bradesco-frontend.git
 ```
-
-### Pré-requisitos
-
-- [Docker](https://www.docker.com/)
 
 
 ### :computer: Frontend
@@ -85,8 +89,7 @@ Faça um clone desse repositório utilizando o comando `git clone` ou faça down
   ```
 
 - Aguarde o browser abrir com o url da aplicação;
-
-Pronto, agora é só explorar a aplicação
+- Pronto, agora é só explorar a aplicação
 
 
 ## :camera: Screenshots
@@ -99,4 +102,4 @@ Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para
 
 ---
 
-Feito com ♥ by [Sandro Santos](https://github.com/sandro-dev) | [Me add no LinkedIn](https://www.linkedin.com/in/sandro-dev/)
+Feito com dedicação por [Sandro Santos](https://github.com/sandro-dev) | [Me add no LinkedIn](https://www.linkedin.com/in/sandro-dev/)
