@@ -11,6 +11,7 @@ import SeguroViagem from '../pages/Seguros/Viagem';
 const routes: React.FC = () => {
   return (
     <Switch>
+      <Route path="/" exact component={Home} />
       <Route path="/home" exact component={Home} />
       <Route path="/seguro-auto" component={SeguroAuto} />
       <Route path="/seguro-residencial" component={SeguroResidencial} />
