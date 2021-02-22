@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import Header from './components/Header';
 
+import { SessionProvider } from './hooks/Session';
 import { ChatProvider } from './hooks/Chat';
 
 import Globalstyle from './styles/global';
@@ -12,10 +13,12 @@ const App: React.FC = () => {
   return (
     <>
       <BrowserRouter>
-        <ChatProvider>
-          <Header />
-          <Routes />
-        </ChatProvider>
+        <SessionProvider>
+          <ChatProvider>
+            <Header />
+            <Routes />
+          </ChatProvider>
+        </SessionProvider>
       </BrowserRouter>
       <Globalstyle />
     </>
