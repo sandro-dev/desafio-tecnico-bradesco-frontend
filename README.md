@@ -93,7 +93,8 @@ Pronto, agora é só explorar a aplicação
 
 ## :camera: Screenshots
 
-<img src="https://raw.githubusercontent.com/sandro-dev/desafio-tecnico-bradesco-frontend/master/screenshots/screenrecord-01.gif" alt="screenshot gif animation" />
+![Chatbot Bradesco](https://raw.githubusercontent.com/sandro-dev/desafio-tecnico-bradesco-frontend/master/screenshots/screenrecord-01.gif)
+
 
 ## :memo: Licença
 
