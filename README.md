@@ -30,6 +30,7 @@
 - Armazena os dados do chat entre o usuário e o bot por 1 hora;
 - É possível fechar a janela e abrir do navegador e recuperar as mensagens de chat, pelo período de 1 hora;
 - É possível maximizar/minimizar a tela de chat
+- Alguns segundos após entrar no site, o chat abre e é enviada uma mensagem pelo robô
 
 
 ## :gear: Tecnologias
