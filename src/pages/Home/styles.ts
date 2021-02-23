@@ -19,6 +19,10 @@ export const Content = styled.div`
     margin: 10px 0;
   }
 
+  h2 {
+    font-size: 22px;
+  }
+
   p {
     color: #333;
   }
