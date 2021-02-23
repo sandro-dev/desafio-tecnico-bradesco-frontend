@@ -6,7 +6,7 @@ import React, {
   useCallback,
 } from 'react';
 import { RiSendPlaneFill } from 'react-icons/ri';
-import { FiMaximize2, FiMinus } from 'react-icons/fi';
+import { FiMaximize2, FiMinimize2 } from 'react-icons/fi';
 
 import { useSession } from '../../hooks/Session';
 import { ChatMessage, useChat } from '../../hooks/Chat';
@@ -22,8 +22,8 @@ interface MessageProps {
 }
 
 const icons = {
-  maximize: <FiMaximize2 size={16} color="#c30826" />,
-  minimize: <FiMinus size={16} color="#c30826" />,
+  maximize: <FiMaximize2 size={22} color="#fff" />,
+  minimize: <FiMinimize2 size={22} color="#fff" />,
 };
 
 const Chat: React.FC<MessageProps> = ({ messages = [] }) => {
@@ -31,7 +31,7 @@ const Chat: React.FC<MessageProps> = ({ messages = [] }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLInputElement>(null);
 
-  const [isClosed, setIsClosed] = useState<boolean>(false);
+  const [isClosed, setIsClosed] = useState<boolean>(true);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -74,14 +74,20 @@ const Chat: React.FC<MessageProps> = ({ messages = [] }) => {
   useEffect(() => {
     const { conversationId, botId, botName, userId } = sessionData;
 
+    setTimeout(() => {
+      setIsClosed(false);
+    }, 3000);
+
     if (conversationId) {
       if (!localStorage.getItem('@ChatBradesco:chatStarted')) {
-        addMessage({
-          conversationId,
-          from: botId,
-          to: userId,
-          text: `Olá, tudo bem? Eu me chamo ${botName}. Posso te ajudar?`,
-        });
+        setTimeout(() => {
+          addMessage({
+            conversationId,
+            from: botId,
+            to: userId,
+            text: `Olá, tudo bem? Eu me chamo ${botName}. Posso te ajudar?`,
+          });
+        }, 5000);
 
         localStorage.setItem('@ChatBradesco:chatStarted', 'true');
       }
