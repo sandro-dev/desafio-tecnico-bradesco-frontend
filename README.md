@@ -69,30 +69,31 @@ Entre na pasta raiz do projeto:
   cd desafio-tecnico-bradesco-frontend
 ```
 
-- Execute o comando yarn para instalar todas as dependências;
+Execute o comando yarn para instalar todas as dependências;
 
 ```bash
   yarn
 ```
 
- - Execute o comando abaixo e preencha o arquivo .env com suas variáveis de ambiente, para que tudo funcione perfeitamente:
+Execute o comando abaixo e preencha o arquivo .env com suas variáveis de ambiente, para que tudo funcione perfeitamente:
 
 ```bash
   cp .env.example .env
 ```
 
-- Execute o seguinte comando para executar a aplicação;
+Execute o seguinte comando para executar a aplicação;
 ```bash
   yarn start
 ```
 
-- Aguarde o browser abrir com o url da aplicação;
-- Pronto, agora é só explorar a aplicação
+Aguarde o browser abrir com o url da aplicação;
+
+Pronto, agora é só explorar a aplicação
 
 
 ## :camera: Screenshots
 
-
+<img src="screenrecord-01.gif" alt="screenshot gif animation" />
 
 ## :memo: Licença
 
